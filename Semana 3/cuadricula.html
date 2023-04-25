@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadricula</title>
+    <style>
+
+        *{
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .header{
+            background-color: rgb(224, 110, 65);
+            width: 100%;
+            float: left;
+            height: 50px;
+        }
+
+        .footer{
+            background-color: brown;
+            width: 100%;
+            float: left;
+            height: 40px;
+        }
+
+        .main{
+            background-color: gray;
+            width: 100%; 
+            float: left;
+            height: 300px;
+        }
+
+        .menu{
+            background-color: rgb(184, 132, 54);
+            width: 25%;
+            float: left;
+        }
+
+        .dashboard{
+            background-color: rgb(201, 85, 32);
+            width: 50%;
+            float: left;
+        }
+
+        .rss{
+            background-color: rgb(214, 226, 43);
+            width: 25%;
+            float: left;
+        }
+
+        .general{
+            position: absolute; /*para que las cajas se redimensionen */
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="general">
+        <div class="header">
+            <h1>Header</h1>
+        </div>
+    
+        <div class="main">
+            <div class="menu">
+                <ul>
+                    <li>Inicio</li>
+                    <li>Acerca de</li>
+                    <li>Nosotros</li>
+                </ul>
+            </div>
+            <div class="dashboard">
+                <h2>Dashboard</h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur necessitatibus fugiat iste, sunt delectus deserunt labore animi? Non in deserunt, ad aut aperiam cumque quod aliquam doloremque reiciendis amet. Alias.
+                </p>
+            </div>
+            <div class="rss">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta asperiores blanditiis doloribus impedit minus quisquam distinctio aut quod quasi placeat, id quas, odio nemo quam voluptates minima magni! Corrupti, provident!
+                </p>
+            </div>
+        </div>
+    
+        <div class="footer">
+            <h1>Footer1</h1>
+        </div>
+    </div>
+</body>
+</html>
