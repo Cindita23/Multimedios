@@ -19,30 +19,33 @@
             <!-- place navbar here -->
         </header>
         <main>
-            <form id="formulario">
-                <div class="mb-3">
-                    <label for="" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
-                        placeholder="Ingrese el nombre del curso">
-                    <small id="helpId" class="form-text text-muted">Nombre acá</small>
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Descripcion</label>
-                    <input type="text" class="form-control" name="descripcion" id="descripcion"
-                        aria-describedby="helpId" placeholder="Ingrese la descripcion del curso">
-                    <small id="helpId" class="form-text text-muted">Descripcion acá</small>
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Tiempo</label>
-                    <input type="text" class="form-control" name="tiempo" id="tiempo" aria-describedby="helpId"
-                        placeholder="Ingrese el tiempo del curso">
-                    <small id="helpId" class="form-text text-muted">Tiempo acá</small>
-                </div>
-                <div class="mb-3">
-                    <button type="reset" class="btn btn-danger">Limpiar</button>
-                    <button type="submit" class="btn btn-success">Guardar</button>
-                </div>
-            </form>
+            <h1 class="fw-bold m-3">Crear Curso</h1>
+            <div class="container-fluid">
+                <form id="formulario">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
+                            placeholder="Ingrese el nombre del curso">
+                        <small id="helpId" class="form-text text-muted">Nombre acá</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Descripcion</label>
+                        <input type="text" class="form-control" name="descripcion" id="descripcion"
+                            aria-describedby="helpId" placeholder="Ingrese la descripción del curso">
+                        <small id="helpId" class="form-text text-muted">Descripción acá</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Tiempo</label>
+                        <input type="text" class="form-control" name="tiempo" id="tiempo" aria-describedby="helpId"
+                            placeholder="Ingrese el tiempo del curso">
+                        <small id="helpId" class="form-text text-muted">Tiempo acá</small>
+                    </div>
+                    <div class="mb-3">
+                        <button type="reset" class="btn btn-danger">Limpiar</button>
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>            
         </main>
         <footer>
             <!-- place footer here -->
@@ -61,29 +64,33 @@
     <script>
         var formulario = document.getElementById('formulario');
 
-        formulario.addEventListener('submit', function(e) {
+        formulario.addEventListener('submit', function (e) {
             alert('Salvando');
             e.preventDefault();//para que no se recargue la pagina 
+            var nombre = document.getElementById('nombre').value;
+            var descripcion = document.getElementById('descripcion').value;
+            var tiempo = document.getElementById('tiempo').value;
+
 
             var datosEnviar = {
-                nombre: "React 1",
-                descripcion: "React Junior1",
-                tiempo: "6 Meses1",
-                usuario: "Cindy Benavides"
+                nombre: nombre,
+                descripcion: descripcion,
+                tiempo: tiempo,
+                usuario: "Cindy"
             }
             console.log(datosEnviar)
 
             fetch("https://paginas-web-cr.com/ApiPHP/apis/InsertarCursos.php",
-            {
-                method:'POST',
-                body: JSON.stringify(datosEnviar)//convierte un objeto o valor de JavaScript en una cadena de texto JSON
-            }  
+                {
+                    method: 'POST',
+                    body: JSON.stringify(datosEnviar)//convierte un objeto o valor de JavaScript en una cadena de texto JSON
+                }
             )
                 .then(respuesta => respuesta.json())
                 .then((datosrespuesta) => {
                     console.log('Datos', datosrespuesta)
                 })
-                .catch(console.log) 
+                .catch(console.log)
         });
     </script>
 </body>
