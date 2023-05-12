@@ -17,12 +17,72 @@
 <body>
   <div class="container-fluid m-0 p-0">
     <header class="mb-3">
-      <nav class="nav bg-dark p-3">
-        <a class="nav-link" href="listarCurso.html">Lista Cursos</a>
-        <a class="nav-link" href="listarProfesores.html">Lista Profesores</a>
-        <a class="nav-link" href="listarEstudiantes.html">Lista Estudiantes</a>
-        <a class="nav-link" href="listarGrupo.html">Lista Grupos</a>
-        <a class="nav-link" href="listarUsuarios.html">Lista Usuarios</a>
+      <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-expand-xl navbar-expand-md">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarTooglerDemo01" aria-controls="navbarTooglerDemo01" aria-expanded="false"
+          aria-label="Toogle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- <div class="ms-4 me-3">
+          <a class="navbar-brand" href="index.html" title="Ir a página Principal">
+            <img src="img/logoHotel.png" alt="Logo" width="170px" height="75px">
+          </a>
+        </div> -->
+
+        <div class="collapse navbar-collapse" id="navbarTooglerDemo01">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown me-4">
+              <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="false">Cursos</a>
+              <div class="dropdown-menu bg-dark">
+                <a class="dropdown-item text-white" href="crearCurso.html">Agregar Curso</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white" href="listarCurso.html">Lista Cursos</a>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown me-4">
+              <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="false">Grupos</a>
+              <div class="dropdown-menu bg-dark">
+                <a class="dropdown-item text-white" href=".html">Agregar Grupo</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white" href=".html">Lista Grupos</a>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown me-4">
+              <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="false">Estudiantes</a>
+              <div class="dropdown-menu bg-dark">
+                <a class="dropdown-item text-white" href=".html">Agregar Estudiante</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white" href=".html">Lista Estudiantes</a>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown me-4">
+              <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="false">Profesores</a>
+              <div class="dropdown-menu bg-dark">
+                <a class="dropdown-item text-white" href=".html">Agregar Profesor</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white" href=".html">Lista Profesores</a>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown me-4">
+              <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="false">Usuarios</a>
+              <div class="dropdown-menu bg-dark">
+                <a class="dropdown-item text-white" href=".html">Agregar Usuario</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white" href=".html">Lista Usuarios</a>
+              </div>
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
 
@@ -41,12 +101,13 @@
               <th>Nombre</th>
               <th>Descripcion</th>
               <th>Tiempo</th>
+              <th>Usuario</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <!-- agregar id a tbody -->
           <tbody class="table-group-divider" id="resultados">
-            <!-- la funcion llena la tabla  -->            
+            <!-- la funcion llena la tabla  -->
           </tbody>
           <tfoot>
 
@@ -54,57 +115,55 @@
         </table>
       </div>
 
-      <!-- Modal trigger button -->      
+      <!-- Modal trigger button -->
       <!-- <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
         Launch
       </button> -->
-      
+
       <!-- Modal Body -->
       <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-      <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+      <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="modalTitleId">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <!-- -------FORMULARIO------- -->
               <form id="formulario">
                 <div class="mb-3">
-                    <label for="" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
-                        placeholder="Ingrese el nombre del curso">
-                    <small id="helpId" class="form-text text-muted">Nombre acá</small>
+                  <input type="hidden" id="id" name="id">
+                  <label for="" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
+                    placeholder="Ingrese el nombre del curso">
+                  <small id="helpId" class="form-text text-muted">Ingrese el nombre del curso</small>
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Descripcion</label>
-                    <input type="text" class="form-control" name="descripcion" id="descripcion"
-                        aria-describedby="helpId" placeholder="Ingrese la descripcion del curso">
-                    <small id="helpId" class="form-text text-muted">Descripcion acá</small>
+                  <label for="" class="form-label">Descripcion</label>
+                  <input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="helpId"
+                    placeholder="Ingrese la descripcion del curso">
+                  <small id="helpId" class="form-text text-muted">Descripcion acá</small>
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Tiempo</label>
-                    <input type="text" class="form-control" name="tiempo" id="tiempo" aria-describedby="helpId"
-                        placeholder="Ingrese el tiempo del curso">
-                    <small id="helpId" class="form-text text-muted">Tiempo acá</small>
+                  <label for="" class="form-label">Tiempo</label>
+                  <input type="text" class="form-control" name="tiempo" id="tiempo" aria-describedby="helpId"
+                    placeholder="Ingrese el tiempo del curso">
+                  <small id="helpId" class="form-text text-muted">Tiempo acá</small>
                 </div>
                 <div class="mb-3">
-                    <button type="reset" class="btn btn-danger">Limpiar</button>
-                    <button type="submit" class="btn btn-success">Guardar</button>
+                  <button type="reset" class="btn btn-danger">Limpiar</button>
+                  <button type="submit" class="btn btn-success">Guardar</button>
                 </div>
-            </form>
+              </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save</button>
             </div>
           </div>
         </div>
-      </div>   
-      
-      
-
+      </div>
     </main>
     <footer>
       <!-- place footer here -->
@@ -123,16 +182,16 @@
   <!-- no se puede hacer un fetch dentro de otro, es mala practica de programacion, se debe solo hacer una peticion  -->
   <script>
     //Declaracion de variable u objetos
-    var contenidoTablaResultado = document.querySelector('#resultados');     
-    const myModal = new bootstrap.Modal(document.getElementById('modalId'));    
+    var contenidoTablaResultado = document.querySelector('#resultados');
+    const myModal = new bootstrap.Modal(document.getElementById('modalId'));
+    var formulario = document.getElementById('formulario');
 
+    //Cargar datos 
     function cargarDatos() {
-      // alert('Cargue datos');
-      fetch("https://paginas-web-cr.com/ApiPHP/apis/ListaCurso.php")//url de peticion de dATOS
+      fetch("https://paginas-web-cr.com/ApiPHP/apis/ListaCurso.php")//url de peticion de datos
         .then(respuesta => respuesta.json())//respuesta recibe los datps en formato json 
         .then((datosrespuesta) => {
-          setTable(datosrespuesta.data)//lo envio para la funcion para darle tratamiento a los datos
-          //console.log('Datos', datosrespuesta.data)//muestra el resulado de la peticion 
+          setTable(datosrespuesta.data)//lo envio para la funcion para darle tratamiento a los datos 
         })
         .catch(console.log)//muestra error         
     }
@@ -141,7 +200,6 @@
     // estamos creando objetos en memoria  
     function setTable(datos) {
       console.log('datos', datos)
-      // contenidoTablaResultado.innerHTML = 'test';
       for (const valor of datos) {
         console.log('valor:', valor);
         contenidoTablaResultado.innerHTML += `
@@ -150,8 +208,9 @@
                             <td>${valor.nombre}</td>
                             <td>${valor.descripcion}</td>
                             <td>${valor.tiempo}</td>
+                            <td>${valor.usuario}</td>
                             <td>
-                              <a name="" id="" class="btn btn-danger" href="#" role="button" onclick="eliminar()">Borrar</a> ||
+                              <a name="" id="" class="btn btn-danger" href="#" role="button" onclick="eliminar('${valor.id}')">Borrar</a> ||
                               <a name="" id="" class="btn btn-primary" href="#" role="button" onclick="editar('${valor.id}', '${valor.nombre}', '${valor.descripcion}', '${valor.tiempo}')">Editar</a>
                               </td>
                         </tr>`;
@@ -160,17 +219,63 @@
 
     cargarDatos();
 
-    function eliminar(){
-      alert("Eliminar");
-    } 
-    
-    function editar(id, nombre, descripcion, tiempo){
+    //Modificar Curso 
+    formulario.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Salvando');
+      var id = document.getElementById('id').value;
+      var nombre = document.getElementById('nombre').value;
+      var descripcion = document.getElementById('descripcion').value;
+      var tiempo = document.getElementById('tiempo').value;
+
+      var datosEnviar = {
+        id: id,
+        nombre: nombre,
+        descripcion: descripcion,
+        tiempo: tiempo,
+        usuario: 'profesor Mario'
+      }
+
+      fetch("https://paginas-web-cr.com/ApiPHP/apis/ActualizarCursos.php",
+        {
+          method: "POST",
+          body: JSON.stringify(datosEnviar)
+        })
+        .then(respuesta => respuesta.json())
+        .then((datosRepuesta) => {
+          window.location = 'listarCurso.html'
+          console.log('datos', datosRepuesta)
+        })
+        .catch(console.log)
+    });
+
+    function editar(id, nombre, descripcion, tiempo) {
       myModal.show();
-      document.getElementById('nombre').value = nombre;      
-      document.getElementById('descripcion').value = descripcion;      
+      document.getElementById('id').value = id;
+      document.getElementById('nombre').value = nombre;
+      document.getElementById('descripcion').value = descripcion;
       document.getElementById('tiempo').value = tiempo;
     }
-    
+
+    //Eliminar Curso 
+    function eliminar(id) {
+      alert('Eliminar ' + id);
+      var datosEnviar = {
+        id: id
+      }
+      fetch("https://paginas-web-cr.com/ApiPHP/apis/BorrarCursos.php",
+        {
+          method: "POST",
+          body: JSON.stringify(datosEnviar)
+        })
+        .then(respuesta => respuesta.json())
+        .then((datosRepuesta) => {
+          window.location = 'listarCurso.html'
+          alert(datosRepuesta.data)
+          console.log('datos', datosRepuesta)
+        })
+        .catch(console.log)
+    }
   </script>
 </body>
 
