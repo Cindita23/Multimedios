@@ -14,6 +14,14 @@ contenidoMenu.innerHTML += `
 
     <div class="collapse navbar-collapse" id="navbarTooglerDemo01">
     <ul class="navbar-nav">
+        <li class="nav-item ms-4">
+            <a class="nav-link fw-bold aumentarLetra" href="index.html">Inicio</a>
+        </li>
+
+        <li class="nav-item ms-4">
+            <a class="nav-link fw-bold aumentarLetra" href="https://paginas-web-cr.com/ApiPHP/">API</a>
+        </li>
+
         <li class="nav-item dropdown ms-4">
         <a class="nav-link dropdown-toggle fw-bold aumentarLetra" href="#" data-bs-toggle="dropdown" role="button"
             aria-haspopup="true" aria-expanded="false">Cursos</a>
