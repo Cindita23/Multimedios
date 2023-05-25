@@ -8,3 +8,12 @@
     font-size: 20px;
     color: white;
 }
+
+.fondoListaGrupos{
+    background-image: url(img/fondoListaGrupo.png); 
+    background-size: cover;
+}
+
+.fondo{
+    background-color: rgba(255, 255, 255, 0.3);
+}
