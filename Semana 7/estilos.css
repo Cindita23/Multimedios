@@ -4,7 +4,7 @@
     font-weight: bold;
 }
 
-.aumentarLetra:hover, .aumentarLetra:focus{
+.aumentarLetra:hover, .aumentarLetra:focus, .aumentarLetra.active{
     font-size: 20px;
     color: white;
 }

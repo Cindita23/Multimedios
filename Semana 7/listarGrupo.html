@@ -103,8 +103,8 @@
                         <h5 class="modal-title" id="modalTitleId">Eliminar</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <p>Esta seguro que desea eliminar el grupo?</p>
+                    <div class="modal-body" id="eliminar1">
+                        
                     </div>
                     <div class="modal-footer" id="eliminar">
                         
@@ -114,8 +114,8 @@
         </div>
 
     </main>
-    <footer>
-        <!-- place footer here -->
+    <footer class="bg-dark text-white container-fluid">
+        <div id="footer"></div>
     </footer>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -130,7 +130,9 @@
     <script>
         var contenidoTablaResultado = document.querySelector('#resultados');
         var contenidoMenu = document.querySelector('#menu');
+        var contenidoFooter = document.querySelector('#footer');
         var contenidoEliminar = document.querySelector('#eliminar');
+        var contenidoEliminar1 = document.querySelector('#eliminar1');
         const myModal = new bootstrap.Modal(document.getElementById('modalId'));
         const modalEliminar = new bootstrap.Modal(document.getElementById('modalId1'));
         const modalExitoso = new bootstrap.Modal(document.getElementById('modalCorrecto'));
@@ -205,6 +207,7 @@
 
         function mostrarModalEliminar(id) {
             modalEliminar.show();
+            contenidoEliminar1.innerHTML = `<p>Esta seguro que desea eliminar el grupo ${id}?</p>`
             contenidoEliminar.innerHTML = `
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <button type="button" class="btn btn-primary" onclick="eliminar('${id}')">Sí</button>
@@ -234,7 +237,7 @@
     </script>
 
     <script src="menu.js"></script>
-
+    <script src="footer.js"></script>
 </body>
 
 </html>

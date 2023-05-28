@@ -13,16 +13,17 @@
     <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body>
-    <div class="container-fluid m-0 p-0">
-        <header>
-            <div id="menu"> </div>
-        </header>
-        <main>
-            <div class="fondoListaGrupos p-5">
-                <h1 class="fw-bold m-3 mt-0 text-center text-white">Crear Grupo</h1>
-            </div>
-            <div class="container-fluid mt-4">
+<body class="fondoListaGrupos">
+    <header>
+        <div id="menu"> </div>
+    </header>
+    <main>
+        <div class="mt-4">
+            <h1 class="fw-bold m-3 mt-0 text-center text-white">Crear Grupo</h1>
+        </div>
+
+        <div class=" m-5 p-5 mb-4 fondo rounded-3">
+            <div class="container-fluid">
                 <form id="formulario">
                     <div class="mb-3">
                         <label for="" class="form-label">Nombre del grupo</label>
@@ -36,58 +37,12 @@
                     </div>
                 </form>
             </div>
-        </main>
-        <footer class="bg-dark text-white">
-            <div class="pl-5 pr-5 pt-3">
-                <div class="row pt-2">
-                    <!--Logo-->
-                    <ul class="col-11 col-sm-12 col-md-12 col-lg-4 col-xl-4 d-flex align-items-center list-unstyled">
-                        <li class="ps-4">
-                            <a href="index.html">
-                                <img src="img/logo.png" width="180px" height="150px" alt="Logo"
-                                    title="Ir a Página Principal">
-                            </a>
-                        </li>
-                    </ul>
+        </div>
+    </main>
 
-                    <ul class="col-11 col-sm-4 col-md-4 col-lg-4 col-xl-4 list-unstyled">
-                        <li class="fw-bold text-uppercase pb-3">El mejor hotel</li>
-                        <li>
-                            <p>Somos tu mejor opción en hoteles, ven y disfrute un momento agradable con nosotros.</p>
-                        </li>
-                        <li><a href="nosotros.html" class="text-reset" target="_blanck">Sobre nosotros</a></li>
-                    </ul>
-
-                    <!--Redes sociales-->
-                    <ul class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 list-unstyled">
-                        <li class="fw-bold text-uppercase">Redes sociales</li><br>
-                        <li class="d-flex">
-                            <a href="https://www.facebook.com/cindy.benavideszuniga.5/" class="text-reset"
-                                target="_blanck">
-                                <img src="iconos/facebook.png" alt="icono de facebook" title="Visitanos en facebook">
-                            </a>
-                            <a href="https://www.instagram.com/cindy.bz/?hl=es" class="text-reset ms-3"
-                                target="_blanck">
-                                <img src="iconos/Instagram.png" alt="icono de instagram" title="Visitanos en instagram">
-                            </a>
-                            <!--La página de YouTube no me pertenece :)-->
-                            <a href="https://www.youtube.com/c/QueBuenLugarCR/videos" class="text-reset ms-3"
-                                target="_blanck">
-                                <img src="iconos/YouTube.png" alt="icono de YouTube" title="Visitanos en YouTube">
-                            </a>
-                            <a href="https://api.whatsapp.com/send?phone=50686582723&text=Hola! Nos gustaría saber más sobre "
-                                class="text-reset ms-3" target="_blanck">
-                                <img src="iconos/whatsapp.png" alt="icono de whatsapp" title="Envianos un mensaje">
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="col-12 mb-2 fw-bold text-center mt-3 p-4">
-                        Universidad Benavides Zúñiga. Todos los derechos reservados&copy;2023
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+    <footer class="bg-dark text-white container-fluid">
+        <div id="footer"></div>
+    </footer>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -101,6 +56,7 @@
     <script>
         var formulario = document.getElementById('formulario');
         var contenidoMenu = document.querySelector('#menu');
+        var contenidoFooter = document.querySelector('#footer');
 
         formulario.addEventListener('submit', function (e) {
             alert('Salvando');
@@ -127,6 +83,7 @@
         });
     </script>
     <script src="menu.js"></script>
+    <script src="footer.js"></script>
 </body>
 
 </html>
