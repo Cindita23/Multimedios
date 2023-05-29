@@ -11,19 +11,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="estilos.css">
+    <link rel="icon" href="Img/icon.png" type="image/png" />
 </head>
 
-<body>
+<body class="fondoProfesores">
     <header class="mb-3">
         <div id="menu"> </div>
     </header>
     <main class="m-4">
-        <h1 class="mb-4">Lista Profesores</h1>
+        <h1 class="fw-bold text-center mb-4 text-white">Lista Profesores</h1>
         <div class="table-responsive">
             <table class="table table-striped
         table-hover
         table-borderless
-        table-primary
+        fondo
         align-middle">
                 <thead class="table-light">
                     <caption>Listar Profesores</caption>
@@ -142,9 +143,46 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal para mensaje transaccion realizada correctamente  -->
+        <div class="modal fade" id="modalCorrecto" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title" id="modalTitleId">Felicidades!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>La transacción ha sido exitosa</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para ELIMINAR  -->
+        <div class="modal fade" id="modalId1" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h5 class="modal-title" id="modalTitleId">Eliminar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="eliminar1">
+
+                    </div>
+                    <div class="modal-footer" id="eliminar">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-    <footer>
-        <!-- place footer here -->
+    <footer class="bg-dark text-white container-fluid">
+        <div id="footer"></div>
     </footer>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -161,6 +199,11 @@
         const myModal = new bootstrap.Modal(document.getElementById('modalId'));
         var contenidoSelectCarrera = document.querySelector('#carrera');
         var formulario = document.getElementById('formulario');
+        var contenidoFooter = document.querySelector('#footer');
+        const modalEliminar = new bootstrap.Modal(document.getElementById('modalId1'));
+        var contenidoEliminar = document.querySelector('#eliminar');
+        var contenidoEliminar1 = document.querySelector('#eliminar1');
+        const modalExitoso = new bootstrap.Modal(document.getElementById('modalCorrecto'));
 
         function cargarDatos() {
             fetch("https://paginas-web-cr.com/ApiPHP/apis/ListaProfesores.php")//url de peticion de dATOS
@@ -178,7 +221,7 @@
             for (const valor of datos) {
                 console.log('valor:', valor);
                 contenidoTablaResultado.innerHTML += `
-             <tr class="table-primary" >
+             <tr class="fondo" >
                 <td scope="row">${valor.id}</td>
                 <td>${valor.cedula}</td>
                 <td>${valor.nombre}</td>
@@ -194,7 +237,7 @@
                 <td>${valor.idCarreras}</td>
                 <td>${valor.usuario}</td>
                 <td>
-                    <a name="" id="" class="btn btn-danger" href="#" role="button" onclick="eliminar('${valor.id}')">Borrar</a> ||
+                    <a name="" id="" class="btn btn-danger" href="#" role="button" onclick="mostrarModalEliminar('${valor.id}')">Borrar</a> ||
                     <a name="" id="" class="btn btn-primary" href="#" role="button"
                     onclick="editar('${valor.id}', '${valor.cedula}', '${valor.nombre}', '${valor.apellidopaterno}',
                     '${valor.apellidomaterno}','${valor.correoelectronico}','${valor.telefono}','${valor.telefonocelular}',
@@ -209,7 +252,6 @@
         //Modificar Profesor
         formulario.addEventListener('submit', function (e) {
             e.preventDefault();
-            alert('Salvando');
             var id = document.getElementById('id').value;
             var cedula = document.getElementById('cedula').value;
             var correo = document.getElementById('correoElectronico').value;
@@ -248,8 +290,8 @@
                 })
                 .then(respuesta => respuesta.json())
                 .then((datosRepuesta) => {
-                    window.location = 'listarProfesores.html'
-                    console.log('datos', datosRepuesta)
+                    transaccionExitosa();
+                    console.log('datos', datosRepuesta);
                 })
                 .catch(console.log)
         });
@@ -286,9 +328,25 @@
 
         llenarCarreras();
 
+        function transaccionExitosa() {
+            myModal.hide();
+            modalEliminar.hide();
+            modalExitoso.show();
+            contenidoTablaResultado.innerHTML = ``;
+            cargarDatos();
+        }
+
+        function mostrarModalEliminar(id) {
+            modalEliminar.show();
+            contenidoEliminar1.innerHTML = `<p>Esta seguro que desea eliminar el grupo ${id}?</p>`
+            contenidoEliminar.innerHTML = `
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" onclick="eliminar('${id}')">Sí</button>
+             `            
+        }
+
         //Eliminar Profesor 
         function eliminar(id) {
-            alert('Eliminar ' + id);
             var datosEnviar = {
                 id: id
             }
@@ -299,13 +357,14 @@
                 })
                 .then(respuesta => respuesta.json())
                 .then((datosRepuesta) => {
-                    window.location = 'listarProfesores.html'
+                    transaccionExitosa();
                     console.log('datos', datosRepuesta)
                 })
                 .catch(console.log)
         }
     </script>
     <script src="menu.js"></script>
+    <script src="footer.js"></script>
 </body>
 
 </html>

@@ -19,7 +19,7 @@ contenidoMenu.innerHTML += `
         </li>
 
         <li class="nav-item ms-4">
-            <a class="nav-link fw-bold aumentarLetra" href="https://paginas-web-cr.com/ApiPHP/">API</a>
+            <a class="nav-link fw-bold aumentarLetra" target="_blanck" href="https://paginas-web-cr.com/ApiPHP/">API</a>
         </li>
 
         <li class="nav-item dropdown ms-4">
