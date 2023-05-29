@@ -18,9 +18,7 @@
         <div id="menu"> </div>
     </header>
     <main>
-        <div class="mt-4">
-            <h1 class="fw-bold m-3 mt-0 text-center text-white">Crear Grupo</h1>
-        </div>
+        <h1 class="fw-bold m-3 mt-4 text-center text-white">Crear Grupo</h1>
 
         <div class=" m-5 p-5 mb-4 fondo rounded-3">
             <div class="container-fluid">
@@ -36,6 +34,24 @@
                         <button type="submit" class="btn btn-success">Guardar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- Modal para mensaje transaccion realizada correctamente  -->
+        <div class="modal fade" id="modalCorrecto" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title" id="modalTitleId">Felicidades!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>La transacción ha sido exitosa</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -57,9 +73,9 @@
         var formulario = document.getElementById('formulario');
         var contenidoMenu = document.querySelector('#menu');
         var contenidoFooter = document.querySelector('#footer');
+        const modalExitoso = new bootstrap.Modal(document.getElementById('modalCorrecto'));
 
         formulario.addEventListener('submit', function (e) {
-            alert('Salvando');
             e.preventDefault();//para que no se recargue la pagina 
 
             var nombreGrupo = document.getElementById('nombreGrupo').value;
@@ -78,9 +94,15 @@
                 .then(respuesta => respuesta.json())
                 .then((datosrespuesta) => {
                     console.log('Datos', datosrespuesta)
+                    transaccionExitosa();
                 })
                 .catch(console.log)
         });
+
+        function transaccionExitosa() {
+            modalExitoso.show();
+        }
+
     </script>
     <script src="menu.js"></script>
     <script src="footer.js"></script>

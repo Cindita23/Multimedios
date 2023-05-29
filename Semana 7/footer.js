@@ -10,7 +10,7 @@ contenidoFooter.innerHTML += `
             </li>
         </ul>
 
-        <ul class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 list-unstyled text-center mb-5">
+        <ul class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5 list-unstyled text-center mb-5">
             <li class="fw-bold text-uppercase pb-3">¿Quienes somos?</li>
             <li>
                 <p>Universidad Benavides Zúñiga, es una institución reconocida a nivel mundial. 
@@ -22,7 +22,7 @@ contenidoFooter.innerHTML += `
             <li><a href="nosotros.html" class="text-reset" target="_blanck">Sobre nosotros</a></li>
         </ul>
 
-        <ul class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 list-unstyled text-center">
+        <ul class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 list-unstyled text-center">
             <li class="fw-bold text-uppercase">Redes sociales</li><br>
             <li class="d-flex justify-content-center">
                 <a href="https://www.facebook.com/cindy.benavideszuniga.5/" class="text-reset" target="_blanck">
@@ -31,7 +31,7 @@ contenidoFooter.innerHTML += `
                 <a href="https://www.instagram.com/cindy.bz/?hl=es" class="text-reset ms-3" target="_blanck">
                     <img src="iconos/Instagram.png" alt="icono de instagram" title="Visitanos en instagram">
                 </a>
-                <a href="https://www.youtube.com/c/QueBuenLugarCR/videos" class="text-reset ms-3"
+                <a href="https://www.youtube.com/channel/UCsx2nIDzB09n4BUHGLqrsdA" class="text-reset ms-3"
                     target="_blanck">
                     <img src="iconos/YouTube.png" alt="icono de YouTube" title="Visitanos en YouTube">
                 </a>

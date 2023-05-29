@@ -41,26 +41,7 @@
 
                 </tfoot>
             </table>
-        </div>
-
-
-        <!-- Modal para mensaje transaccion realizada correctamente  -->
-        <div class="modal fade" id="modalCorrecto" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-success">
-                        <h5 class="modal-title" id="modalTitleId">Felicidades!</h5>
-                    </div>
-                    <div class="modal-body">
-                        <p>La transacción ha sido exitosa</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>        
 
         <!-- modal para modificar -->
         <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -94,6 +75,24 @@
             </div>
         </div>
 
+        <!-- Modal para mensaje transaccion realizada correctamente  -->
+        <div class="modal fade" id="modalCorrecto" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title" id="modalTitleId">Felicidades!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>La transacción ha sido exitosa</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal para ELIMINAR  -->
         <div class="modal fade" id="modalId1" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
             role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
@@ -117,6 +116,7 @@
     <footer class="bg-dark text-white container-fluid">
         <div id="footer"></div>
     </footer>
+
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
@@ -129,11 +129,12 @@
     <!-- fetch -->
     <script>
         var contenidoTablaResultado = document.querySelector('#resultados');
+        var formulario = document.getElementById('formulario');
         var contenidoMenu = document.querySelector('#menu');
         var contenidoFooter = document.querySelector('#footer');
         var contenidoEliminar = document.querySelector('#eliminar');
         var contenidoEliminar1 = document.querySelector('#eliminar1');
-        const myModal = new bootstrap.Modal(document.getElementById('modalId'));
+        const myModal = new bootstrap.Modal(document.getElementById('modalId'));//modal de modificar
         const modalEliminar = new bootstrap.Modal(document.getElementById('modalId1'));
         const modalExitoso = new bootstrap.Modal(document.getElementById('modalCorrecto'));
 
