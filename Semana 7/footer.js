@@ -10,7 +10,7 @@ contenidoFooter.innerHTML += `
             </li>
         </ul>
 
-        <ul class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5 list-unstyled text-center mb-5">
+        <ul class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5 list-unstyled text-center mb-4">
             <li class="fw-bold text-uppercase pb-3">¿Quienes somos?</li>
             <li>
                 <p>Universidad Benavides Zúñiga, es una institución reconocida a nivel mundial. 
@@ -19,7 +19,7 @@ contenidoFooter.innerHTML += `
                     mejor se adapte a tus sueños.
                 </p>
             </li>
-            <li><a href="nosotros.html" class="text-reset" target="_blanck">Sobre nosotros</a></li>
+            <li><a href="index.html" class="text-reset" target="_blanck">Sobre nosotros</a></li>
         </ul>
 
         <ul class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 list-unstyled text-center">
@@ -44,7 +44,7 @@ contenidoFooter.innerHTML += `
                 </a>
             </li>
         </ul>
-        <div class="col-12 fw-bold text-center mt-3 p-4">
+        <div class="col-12 fw-bold text-center p-4">
             Universidad Benavides Zúñiga. Todos los derechos reservados&copy;2023
         </div>
     </div>
