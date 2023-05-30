@@ -80,18 +80,21 @@
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Apellido paterno</label>
-                                <input required type="text" class="form-control" name="apellidoPaterno" id="apellidoPaterno"
-                                    aria-describedby="helpId" placeholder="Ingrese el apellido paterno">
+                                <input required type="text" class="form-control" name="apellidoPaterno"
+                                    id="apellidoPaterno" aria-describedby="helpId"
+                                    placeholder="Ingrese el apellido paterno">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Apellido materno</label>
-                                <input required type="text" class="form-control" name="apellidoMaterno" id="apellidoMaterno"
-                                    aria-describedby="helpId" placeholder="Ingrese el apellido materno">
+                                <input required type="text" class="form-control" name="apellidoMaterno"
+                                    id="apellidoMaterno" aria-describedby="helpId"
+                                    placeholder="Ingrese el apellido materno">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Email</label>
-                                <input required type="email" class="form-control" name="correoElectronico" id="correoElectronico"
-                                    aria-describedby="helpId" placeholder="Ingrese el correoElectronico">
+                                <input required type="email" class="form-control" name="correoElectronico"
+                                    id="correoElectronico" aria-describedby="helpId"
+                                    placeholder="Ingrese el correoElectronico">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Teléfono</label>
@@ -105,13 +108,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Fecha Nacimiento</label>
-                                <input required type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
-                                    aria-describedby="helpId" placeholder="Ingrese la fecha de nacimiento">
+                                <input required type="date" class="form-control" name="fechaNacimiento"
+                                    id="fechaNacimiento" aria-describedby="helpId"
+                                    placeholder="Ingrese la fecha de nacimiento">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Sexo</label>
-                                <input required type="text" class="form-control" name="sexo" id="sexo" aria-describedby="helpId"
-                                    placeholder="Ingrese el sexo">
+                                <input required type="text" class="form-control" name="sexo" id="sexo"
+                                    aria-describedby="helpId" placeholder="Ingrese el sexo">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Dirección</label>
@@ -180,6 +184,24 @@
                 </div>
             </div>
         </div>
+
+        <!-- PARA QUE LLENE TODOS LOS CAMPOS  -->
+        <div class="modal fade" id="modalVacio" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning">
+                        <h5 class="modal-title" id="modalTitleId">Atención!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Por favor llene todos los campos para poder continuar, gracias!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer class="bg-dark text-white container-fluid">
         <div id="footer"></div>
@@ -204,6 +226,7 @@
         var contenidoEliminar = document.querySelector('#eliminar');
         var contenidoEliminar1 = document.querySelector('#eliminar1');
         const modalExitoso = new bootstrap.Modal(document.getElementById('modalCorrecto'));
+        const modalVacio = new bootstrap.Modal(document.getElementById('modalVacio'));
 
         function cargarDatos() {
             fetch("https://paginas-web-cr.com/ApiPHP/apis/ListaProfesores.php")//url de peticion de dATOS
@@ -266,34 +289,40 @@
             var nacionalidad = document.getElementById('nacionalidad').value;
             var idCarreras = document.getElementById('carrera').value;
 
-            var datosEnviar = {
-                id: id,
-                cedula: cedula,
-                correoelectronico: correo,
-                telefono: telefono,
-                telefonocelular: telefonoCelular,
-                fechanacimiento: fechaNacimiento,
-                sexo: sexo,
-                direccion: direccion,
-                nombre: nombre,
-                apellidopaterno: apellidoPaterno,
-                apellidomaterno: apellidoMaterno,
-                nacionalidad: nacionalidad,
-                idCarreras: idCarreras,
-                usuario: 'Profesora Benavides1'
-            }
+            if (!cedula || !nombre || !apellidoMaterno || !apellidoPaterno || !correoElectronico || !telefono ||
+                !fechaNacimiento || !sexo || !direccion || !nacionalidad || !idCarreras) {
+                e.preventDefault();
+                modalVacio.show();
+            } else {
+                var datosEnviar = {
+                    id: id,
+                    cedula: cedula,
+                    correoelectronico: correo,
+                    telefono: telefono,
+                    telefonocelular: telefonoCelular,
+                    fechanacimiento: fechaNacimiento,
+                    sexo: sexo,
+                    direccion: direccion,
+                    nombre: nombre,
+                    apellidopaterno: apellidoPaterno,
+                    apellidomaterno: apellidoMaterno,
+                    nacionalidad: nacionalidad,
+                    idCarreras: idCarreras,
+                    usuario: 'Profesora Benavides1'
+                }
 
-            fetch("https://paginas-web-cr.com/ApiPHP/apis/ActualizarProfesores.php",
-                {
-                    method: 'POST',
-                    body: JSON.stringify(datosEnviar)
-                })
-                .then(respuesta => respuesta.json())
-                .then((datosRepuesta) => {
-                    transaccionExitosa();
-                    console.log('datos', datosRepuesta);
-                })
-                .catch(console.log)
+                fetch("https://paginas-web-cr.com/ApiPHP/apis/ActualizarProfesores.php",
+                    {
+                        method: 'POST',
+                        body: JSON.stringify(datosEnviar)
+                    })
+                    .then(respuesta => respuesta.json())
+                    .then((datosRepuesta) => {
+                        transaccionExitosa();
+                        console.log('datos', datosRepuesta);
+                    })
+                    .catch(console.log)
+            }
         });
 
         function editar(id, cedula, nombre, apellidoPaterno, apellidoMaterno, correoElectronico, telefono, telefonoCelular, fechaNacimiento, sexo, direccion, nacionalidad, idCarreras) {
@@ -342,7 +371,7 @@
             contenidoEliminar.innerHTML = `
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <button type="button" class="btn btn-primary" onclick="eliminar('${id}')">Sí</button>
-             `            
+             `
         }
 
         //Eliminar Profesor 

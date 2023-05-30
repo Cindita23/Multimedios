@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="estilos.css">
-    <link  rel="icon"   href="Img/icon.png" type="image/png"/>
+    <link rel="icon" href="Img/icon.png" type="image/png" />
 </head>
 
 <body class="fondoListaGrupos">
@@ -29,9 +29,9 @@
                 <thead class="table-light">
                     <caption>Grupos</caption>
                     <tr>
-                        <th >Id</th>
-                        <th >Nombre del grupo</th>
-                        <th >Acciones</th>
+                        <th>Id</th>
+                        <th>Nombre del grupo</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider" id="resultados">
@@ -41,12 +41,12 @@
 
                 </tfoot>
             </table>
-        </div>        
+        </div>
 
         <!-- modal para modificar -->
         <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
             role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalTitleId">Editar Grupo</h5>
@@ -103,10 +103,27 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="eliminar1">
-                        
+
                     </div>
                     <div class="modal-footer" id="eliminar">
-                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- PARA QUE LLENE TODOS LOS CAMPOS  -->
+        <div class="modal fade" id="modalVacio" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning">
+                        <h5 class="modal-title" id="modalTitleId">Atención!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Por favor llene todos los campos para poder continuar, gracias!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -131,12 +148,13 @@
         var contenidoTablaResultado = document.querySelector('#resultados');
         var formulario = document.getElementById('formulario');
         var contenidoMenu = document.querySelector('#menu');
-        var contenidoFooter = document.querySelector('#footer');        
+        var contenidoFooter = document.querySelector('#footer');
         const myModal = new bootstrap.Modal(document.getElementById('modalId'));//modal de modificar
         const modalEliminar = new bootstrap.Modal(document.getElementById('modalId1'));
         var contenidoEliminar = document.querySelector('#eliminar');
         var contenidoEliminar1 = document.querySelector('#eliminar1');
         const modalExitoso = new bootstrap.Modal(document.getElementById('modalCorrecto'));
+        const modalVacio = new bootstrap.Modal(document.getElementById('modalVacio'));
 
 
         function cargarDatos() {
@@ -174,22 +192,27 @@
             var id = document.getElementById('id').value;
             var nombreGrupo = document.getElementById('nombreGrupo').value;
 
-            var datosEnviar = {
-                id: id,
-                nombre: nombreGrupo
-            }
+            if (!nombreGrupo) {
+                e.preventDefault();
+                modalVacio.show();
+            } else {
+                var datosEnviar = {
+                    id: id,
+                    nombre: nombreGrupo
+                }
 
-            fetch("https://paginas-web-cr.com/ApiPHP/apis/ActualizarGrupo.php",
-                {
-                    method: 'POST',
-                    body: JSON.stringify(datosEnviar)
-                })
-                .then(respuesta => respuesta.json())
-                .then((datosRepuesta) => {
-                    transaccionExitosa();
-                    console.log('datos', datosRepuesta)
-                })
-                .catch(console.log)
+                fetch("https://paginas-web-cr.com/ApiPHP/apis/ActualizarGrupo.php",
+                    {
+                        method: 'POST',
+                        body: JSON.stringify(datosEnviar)
+                    })
+                    .then(respuesta => respuesta.json())
+                    .then((datosRepuesta) => {
+                        transaccionExitosa();
+                        console.log('datos', datosRepuesta)
+                    })
+                    .catch(console.log)
+            }
         });
 
         function editar(id, nombreGrupo) {
@@ -212,7 +235,7 @@
             contenidoEliminar.innerHTML = `
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <button type="button" class="btn btn-primary" onclick="eliminar('${id}')">Sí</button>
-             `            
+             `
         }
 
         //Eliminar Grupo 

@@ -26,13 +26,13 @@
                     <form id="formulario">
                         <div class="mb-3">
                             <label for="" class="form-label">Cédula</label>
-                            <input required type="text" class="form-control" name="cedula" id="cedula" aria-describedby="helpId"
-                                placeholder="Ingrese la cédula del estudiante">
+                            <input required type="text" class="form-control" name="cedula" id="cedula"
+                                aria-describedby="helpId" placeholder="Ingrese la cédula del estudiante">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Nombre</label>
-                            <input required type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
-                                placeholder="Ingrese el nombre del estudiante">
+                            <input required type="text" class="form-control" name="nombre" id="nombre"
+                                aria-describedby="helpId" placeholder="Ingrese el nombre del estudiante">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Apellido paterno</label>
@@ -46,8 +46,9 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Email</label>
-                            <input required type="email" class="form-control" name="correoElectronico" id="correoElectronico"
-                                aria-describedby="helpId" placeholder="Ingrese el correo Electronico">
+                            <input required type="email" class="form-control" name="correoElectronico"
+                                id="correoElectronico" aria-describedby="helpId"
+                                placeholder="Ingrese el correo Electronico">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Teléfono</label>
@@ -66,8 +67,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Sexo</label>
-                            <input required type="text" class="form-control" name="sexo" id="sexo" aria-describedby="helpId"
-                                placeholder="Ingrese el sexo">
+                            <input required type="text" class="form-control" name="sexo" id="sexo"
+                                aria-describedby="helpId" placeholder="Ingrese el sexo">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Dirección</label>
@@ -112,6 +113,24 @@
                     </div>
                 </div>
             </div>
+
+            <!-- PARA QUE LLENE TODOS LOS CAMPOS  -->
+            <div class="modal fade" id="modalVacio" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <h5 class="modal-title" id="modalTitleId">Atención!</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Por favor llene todos los campos para poder continuar, gracias!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer class="bg-dark text-white container-fluid">
             <div id="footer"></div>
@@ -131,6 +150,7 @@
             var contenidoSelectCarrera = document.querySelector('#carrera');
             var contenidoFooter = document.querySelector('#footer');
             const modalExitoso = new bootstrap.Modal(document.getElementById('modalCorrecto'));
+            const modalVacio = new bootstrap.Modal(document.getElementById('modalVacio'));
 
             formulario.addEventListener('submit', function (e) {
                 e.preventDefault();//para que no se recargue la pagina 
@@ -148,35 +168,41 @@
                 var nacionalidad = document.getElementById('nacionalidad').value;
                 var idCarreras = document.getElementById('carrera').value;
 
-                var datosEnviar = {
-                    cedula: cedula,
-                    correoelectronico: correoElectronico,
-                    telefono: telefono,
-                    telefonocelular: telefonoCelular,
-                    fechanacimiento: fechaNacimiento,
-                    sexo: sexo,
-                    direccion: direccion,
-                    nombre: nombre,
-                    apellidopaterno: apellidoPaterno,
-                    apellidomaterno: apellidoMaterno,
-                    nacionalidad: nacionalidad,
-                    idCarreras: idCarreras,
-                    usuario: "Profesora Benavides"
-                }
-                console.log(datosEnviar)
-
-                fetch("https://paginas-web-cr.com/ApiPHP/apis/InsertarEstudiantes.php",
-                    {
-                        method: 'POST',
-                        body: JSON.stringify(datosEnviar)//convierte un objeto o valor de JavaScript en una cadena de texto JSON
+                if (!cedula || !nombre || !apellidoMaterno || !apellidoPaterno || !correoElectronico || !telefono ||
+                    !fechaNacimiento || !sexo || !direccion || !nacionalidad || !idCarreras) {
+                    e.preventDefault();
+                    modalVacio.show();
+                } else {
+                    var datosEnviar = {
+                        cedula: cedula,
+                        correoelectronico: correoElectronico,
+                        telefono: telefono,
+                        telefonocelular: telefonoCelular,
+                        fechanacimiento: fechaNacimiento,
+                        sexo: sexo,
+                        direccion: direccion,
+                        nombre: nombre,
+                        apellidopaterno: apellidoPaterno,
+                        apellidomaterno: apellidoMaterno,
+                        nacionalidad: nacionalidad,
+                        idCarreras: idCarreras,
+                        usuario: "Profesora Benavides"
                     }
-                )
-                    .then(respuesta => respuesta.json())
-                    .then((datosrespuesta) => {
-                        console.log('Datos', datosrespuesta);
-                        transaccionExitosa();
-                    })
-                    .catch(console.log)
+                    console.log(datosEnviar)
+
+                    fetch("https://paginas-web-cr.com/ApiPHP/apis/InsertarEstudiantes.php",
+                        {
+                            method: 'POST',
+                            body: JSON.stringify(datosEnviar)//convierte un objeto o valor de JavaScript en una cadena de texto JSON
+                        }
+                    )
+                        .then(respuesta => respuesta.json())
+                        .then((datosrespuesta) => {
+                            console.log('Datos', datosrespuesta);
+                            transaccionExitosa();
+                        })
+                        .catch(console.log)
+                }
             });
 
             function llenarCarreras() {

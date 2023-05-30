@@ -26,8 +26,8 @@
                     <form id="formulario">
                         <div class="mb-3">
                             <label for="" class="form-label">Nombre</label>
-                            <input required type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
-                                placeholder="Ingrese el nombre del curso">
+                            <input required type="text" class="form-control" name="nombre" id="nombre"
+                                aria-describedby="helpId" placeholder="Ingrese el nombre del curso">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Descripción</label>
@@ -36,8 +36,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Tiempo</label>
-                            <input required type="text" class="form-control" name="tiempo" id="tiempo" aria-describedby="helpId"
-                                placeholder="Ingrese el tiempo del curso">
+                            <input required type="text" class="form-control" name="tiempo" id="tiempo"
+                                aria-describedby="helpId" placeholder="Ingrese el tiempo del curso">
                         </div>
                         <div class="mb-3">
                             <button type="reset" class="btn btn-danger">Limpiar</button>
@@ -64,7 +64,26 @@
                     </div>
                 </div>
             </div>
+
+            <!-- PARA QUE LLENE TODOS LOS CAMPOS  -->
+            <div class="modal fade" id="modalVacio" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <h5 class="modal-title" id="modalTitleId">Atención!</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Por favor llene todos los campos para poder continuar, gracias!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
+
         <footer class="bg-dark text-white container-fluid">
             <div id="footer"></div>
         </footer>
@@ -84,6 +103,7 @@
         var contenidoMenu = document.querySelector('#menu');
         var contenidoFooter = document.querySelector('#footer');
         const modalExitoso = new bootstrap.Modal(document.getElementById('modalCorrecto'));
+        const modalVacio = new bootstrap.Modal(document.getElementById('modalVacio'));
 
         formulario.addEventListener('submit', function (e) {
             e.preventDefault();//para que no se recargue la pagina 
@@ -92,26 +112,31 @@
             var descripcion = document.getElementById('descripcion').value;
             var tiempo = document.getElementById('tiempo').value;
 
-            var datosEnviar = {
-                nombre: nombre,
-                descripcion: descripcion,
-                tiempo: tiempo,
-                usuario: "Profesora Benavides"
-            }
-            console.log(datosEnviar)
-
-            fetch("https://paginas-web-cr.com/ApiPHP/apis/InsertarCursos.php",
-                {
-                    method: 'POST',
-                    body: JSON.stringify(datosEnviar)//convierte un objeto o valor de JavaScript en una cadena de texto JSON
+            if (!nombre || !descripcion || !tiempo) {
+                e.preventDefault();
+                modalVacio.show();
+            } else {
+                var datosEnviar = {
+                    nombre: nombre,
+                    descripcion: descripcion,
+                    tiempo: tiempo,
+                    usuario: "Profesora Benavides"
                 }
-            )
-                .then(respuesta => respuesta.json())
-                .then((datosrespuesta) => {
-                    console.log('Datos', datosrespuesta); 
-                    transaccionExitosa();
-                })
-                .catch(console.log)
+                console.log(datosEnviar)
+
+                fetch("https://paginas-web-cr.com/ApiPHP/apis/InsertarCursos.php",
+                    {
+                        method: 'POST',
+                        body: JSON.stringify(datosEnviar)//convierte un objeto o valor de JavaScript en una cadena de texto JSON
+                    }
+                )
+                    .then(respuesta => respuesta.json())
+                    .then((datosrespuesta) => {
+                        console.log('Datos', datosrespuesta);
+                        transaccionExitosa();
+                    })
+                    .catch(console.log)
+            }
         });
 
         function transaccionExitosa() {
